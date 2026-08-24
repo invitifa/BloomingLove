@@ -1431,13 +1431,14 @@
 
     <script>
         const TARGET_COUNTDOWN = "2026-12-06T00:00:00"; 
+        
+        // =========================================================================
+        // [LOKASI MENGGANTI LINK GOOGLE APPS SCRIPT]
+        // Ganti URL di bawah ini dengan URL Deployment Apps Script Anda yang baru.
+        // =========================================================================
         const WEB_APP_URL = "https://script.google.com/macros/s/AKfycbzWnIQcsMbOoasWVG-oVCjMYZlHNqjoFQS-c-1bPDSshXfvzIs5pFdHtbgPoRktEavB/exec";
 
-        let dataUcapan = [
-            { nama: "", status: "", teks: "" },
-            { nama: "", status: "", teks: "" },
-            { nama: "", status: "", teks: "" }
-        ];
+        let dataUcapan = [];
         
         let ucapanCurrentPage = 1;
         const ucapanPerPage = 5;
@@ -1660,6 +1661,12 @@
             title.innerText = `${dataUcapan.length} Ucapan Terkirim`;
             container.innerHTML = "";
 
+            if(dataUcapan.length === 0) {
+                container.innerHTML = `<div style="text-align:center; font-size:0.75rem; color:#888; padding: 15px 0;">Belum ada ucapan. Jadilah yang pertama memberikan ucapan!</div>`;
+                paginationContainer.innerHTML = "";
+                return;
+            }
+
             const startIndex = (ucapanCurrentPage - 1) * ucapanPerPage;
             const endIndex = startIndex + ucapanPerPage;
             const paginatedItems = dataUcapan.slice(startIndex, endIndex);
@@ -1731,11 +1738,12 @@
             }
         }
 
+        // --- PENYESUAIAN KIRIM/BACA APPS SCRIPT BERDASARKAN BEST PRACTICE GOOGLE APPS SCRIPT ---
         function ambilDataUcapan() {
             fetch(`${WEB_APP_URL}?action=read`)
                 .then(response => response.json())
                 .then(data => {
-                    if (data && data.length > 0) {
+                    if (Array.isArray(data)) {
                         dataUcapan = data;
                     }
                     renderUcapan();
@@ -1766,14 +1774,19 @@
             btnSubmit.disabled = true;
             btnSubmit.innerText = "Mengirim...";
 
-            const formData = new FormData();
-            formData.append('nama', nama);
-            formData.append('status', status);
-            formData.append('teks', teks);
+            const payload = {
+                nama: nama,
+                status: status,
+                teks: teks
+            };
 
+            // Mengirim data menggunakan URLSearchParams / text/plain untuk menghindari batasan CORS Preflight Apps Script
             fetch(WEB_APP_URL, {
                 method: 'POST',
-                body: formData
+                headers: {
+                    'Content-Type': 'text/plain;charset=utf-8'
+                },
+                body: JSON.stringify(payload)
             })
             .then(response => response.json())
             .then(result => {
@@ -1783,11 +1796,12 @@
                     ucapanCurrentPage = 1;
                     ambilDataUcapan();
                 } else {
-                    alert("Gagal mengirim ucapan, silakan coba lagi.");
+                    alert("Gagal mengirim ucapan: " + (result.message || "Silakan coba lagi."));
                 }
             })
             .catch(err => {
                 console.error("Error saat mengirim:", err);
+                // Fallback lokal jika jaringan terganggu
                 dataUcapan.unshift({ nama, status, teks });
                 inputNama.value = "";
                 inputMesej.value = "";
