@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>kreatifa.idn-undangan digital</title>
+    <title>The Wedding of Hazela & Kayden</title>
     <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Montserrat:wght@300;500;600;700&display=swap" rel="stylesheet">
     
     <meta property="og:type" content="website">
@@ -331,7 +331,7 @@
             position: relative;
             width: 100%;
             min-height: 100vh;
-            height: auto;
+            height: 100%;
             background-color: #feffed;
             overflow: hidden;
             display: flex;
@@ -737,15 +737,6 @@
             display: flex;
             justify-content: center;
             align-items: center;
-        }
-
-        .p2-card-wrapper .p2-img1 {
-            position: relative !important;
-            left: unset !important;
-            transform: none !important;
-            width: 100%;
-            height: auto;
-            display: block;
         }
 
         .p2-countdown-container {
@@ -1776,34 +1767,29 @@
             btnSubmit.disabled = true;
             btnSubmit.innerText = "Mengirim...";
 
-            const payload = {
-                nama: nama,
-                status: status,
-                teks: teks
-            };
+            const formData = new FormData();
+            formData.append('nama', nama);
+            formData.append('status', status);
+            formData.append('teks', teks);
 
-            // Mengirim data menggunakan URLSearchParams / text/plain untuk menghindari batasan CORS Preflight Apps Script
+            // Menggunakan mode no-cors untuk melewati hambatan CORS pada Google Apps Script
             fetch(WEB_APP_URL, {
                 method: 'POST',
-                headers: {
-                    'Content-Type': 'text/plain;charset=utf-8'
-                },
-                body: JSON.stringify(payload)
+                mode: 'no-cors',
+                body: formData
             })
-            .then(response => response.json())
-            .then(result => {
-                if(result.result === "success" || result.status === "success") {
-                    inputNama.value = "";
-                    inputMesej.value = "";
-                    ucapanCurrentPage = 1;
-                    ambilDataUcapan();
-                } else {
-                    alert("Gagal mengirim ucapan: " + (result.message || "Silakan coba lagi."));
-                }
+            .then(() => {
+                // Tambahkan ucapan ke tampilan lokal secara instan
+                dataUcapan.unshift({ nama, status, teks });
+                inputNama.value = "";
+                inputMesej.value = "";
+                ucapanCurrentPage = 1;
+                renderUcapan();
+                // Muat ulang data lengkap dari sheet
+                setTimeout(ambilDataUcapan, 1000);
             })
             .catch(err => {
                 console.error("Error saat mengirim:", err);
-                // Fallback lokal jika jaringan terganggu
                 dataUcapan.unshift({ nama, status, teks });
                 inputNama.value = "";
                 inputMesej.value = "";
