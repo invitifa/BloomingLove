@@ -8,7 +8,7 @@
     
     <meta property="og:type" content="website">
     <meta property="og:title" content="The Wedding of Hazela & Kayden">
-    <meta property="og:description" content="Tanpa mengurangi rasa hormat, kami mengundang Anda untuk menghadiri acara pernikahan kami.">
+    <meta property="og:description" content="Kreatifa.idn Undangan Digital">
     <meta property="og:url" content="https://alamatundangananda.com">
     <meta property="og:image" content="https://alamatundangananda.com/foto1.jpg"> 
     <meta property="og:image:width" content="1200">
@@ -33,19 +33,19 @@
         /* --- CONFIG SETTINGAN CUSTOM POSISI, UKURAN, FONT & WARNA --- */
         :root {
             /* --- SETTINGAN UKURAN DAN POSISI HAPUS / GESER SETIAP HALAMAN (BERURUTAN) --- */
-            --p1-width: 95%;   --p1-top: 5%;   --p1-left: 50%;
-            --p2-width: 100%;  --p2-top: auto; --p2-left: 50%;
-            --p3-width: 95%;   --p3-top: 5%;   --p3-left: 50%;
-            --p4-width: 95%;   --p4-top: 5%;   --p4-left: 50%;
-            --p5-width: 95%;   --p5-top: 5%;   --p5-left: 50%;
-            --p6-width: 100%;  --p6-top: auto; --p6-left: 50%;
-            --p7-width: 95%;   --p7-top: 5%;   --p7-left: 50%;
-            --p8-width: 85%;   --p8-top: 2%;   --p8-left: 50%;
-            --p9-width: 85%;   --p9-top: 5%;   --p9-left: 50%;
-            --p10-width: 100%; --p10-top: auto;--p10-left: 50%;
-            --p11-width: 100%; --p11-top: auto;--p11-left: 50%;
-            --p12-width: 90%;  --p12-top: -4%; --p12-left: 50%;
-            --p13-width: 95%;  --p13-top: 5%; --p13-left: 50%;
+            --p1-width: 125%;   --p1-top: 3%;   --p1-left: 50%;
+            --p2-width: 140%;  --p2-top: 0.1%; --p2-left: 50%; /* DIBUAT BISA DIGESER DENGAN MENGUBAH --p2-top */
+            --p3-width: 140%;   --p3-top: 7%;   --p3-left: 50%;
+            --p4-width: 135%;   --p4-top: 8.5%;   --p4-left: 50%;
+            --p5-width: 135%;   --p5-top: 0.1%;   --p5-left: 50%;
+            --p6-width: 120%;  --p6-top: auto; --p6-left: 50%;
+            --p7-width: 130%;   --p7-top: 5%;   --p7-left: 50%;
+            --p8-width: 130%;   --p8-top: 2%;   --p8-left: 50%;
+            --p9-width: 130%;   --p9-top: 3%;   --p9-left: 50%;
+            --p10-width: 120%; --p10-top: auto;--p10-left: 50%;
+            --p11-width: 120%; --p11-top: auto;--p11-left: 50%;
+            --p12-width: 120%;  --p12-top: -4%; --p12-left: 50%;
+            --p13-width: 125%;  --p13-top: 8%; --p13-left: 50%;
 
             /* Cover Settings */
             --cover-title-font: 'Montserrat', sans-serif;
@@ -57,7 +57,7 @@
             --cover-title-transform: none;
 
             --cover-name-font: 'Authenia', cursive;
-            --cover-name-size: 1.5rem;
+            --cover-name-size: 1.8rem;
             --cover-name-color: #9bab50;
             --cover-name-weight: 700;
             --cover-name-margin-bottom: 0px;
@@ -260,22 +260,22 @@
             -webkit-overflow-scrolling: touch; 
         }
 
-        /* --- SIDE CONTROLS CONTAINER --- */
+        /* --- SIDE CONTROLS CONTAINER (LEBIH KECIL) --- */
         .side-controls {
             position: absolute;
-            right: 15px; 
-            bottom: 30px;
+            right: 12px; 
+            bottom: 25px;
             display: flex;
             flex-direction: column;
             align-items: center;
-            gap: 12px;
+            gap: 8px;
             z-index: 99;
             pointer-events: none;
         }
         
         .side-controls .ctrl-btn {
-            width: 36px; 
-            height: 36px; 
+            width: 24px; 
+            height: 24px; 
             display: flex;
             align-items: center;
             justify-content: center;
@@ -286,29 +286,33 @@
             border: none;
             outline: none;
             pointer-events: auto;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.12);
+            box-shadow: 0 2px 8px rgba(0,0,0,0.12);
             transition: transform 0.2s ease, opacity 0.5s ease;
             opacity: 0;
         }
 
         .side-controls.show .ctrl-btn {
+            opacity: 0.65; /* Dibuat agak samar agar tidak menarik perhatian berlebih */
+        }
+        
+        .side-controls.show .ctrl-btn:hover {
             opacity: 1;
         }
 
         .side-controls .ctrl-btn:active {
-            transform: scale(0.9);
+            transform: scale(0.85);
         }
 
         .btn-nav-arrow {
             border-radius: 50%;
-            background-color: rgba(255, 255, 255, 0.9);
-            padding: 8px;
+            background-color: rgba(255, 255, 255, 0.85);
+            padding: 5px;
         }
 
         .btn-music-ctrl {
             border-radius: 50%;
             background-color: #9bab50;
-            padding: 8px;
+            padding: 3px;
             color: #feffed;
         }
 
@@ -324,6 +328,46 @@
         }
         .music-rotating {
             animation: rotateMusic 4s linear infinite;
+        }
+
+        /* --- SWIPE INDICATOR HALAMAN 1 --- */
+        .swipe-indicator {
+            position: absolute;
+            bottom: 40px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 5px;
+            z-index: 20;
+            pointer-events: none;
+            opacity: 0.8;
+            transition: opacity 0.5s ease;
+            animation: swipeBlink 1.8s ease-in-out infinite;
+        }
+
+        .swipe-indicator.hide {
+            opacity: 0 !important;
+        }
+
+        .swipe-text {
+            font-size: 0.8rem;
+            font-weight: 500;
+            color: #9bab50;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+        }
+
+        .swipe-icon {
+            width: 12px;
+            height: 12px;
+            fill: #9bab50;
+        }
+
+        @keyframes swipeBlink {
+            0%, 100% { opacity: 0.3; transform: translateX(-50%) translateY(0); }
+            50% { opacity: 0.9; transform: translateX(-50%) translateY(4px); }
         }
 
         /* --- CONFIG PANJANG HALAMAN --- */
@@ -350,7 +394,7 @@
         #page2  { 
             min-height: 67vh; 
             padding: 20px 0; 
-            --cd-top-position: 22%;
+            --cd-top-position: 18%; /* SESUAIKAN NILAI INI UNTUK MENGATUR POSISI COUNTDOWN NAIK/TURUN */
             --cd-width: 78%;
             --cd-bg-color:#9bab50;
             --cd-border-color: #9bab50;
@@ -732,8 +776,8 @@
 
         .p2-card-wrapper {
             position: relative;
-            width: 95%;
-            max-width: 380px;
+            width: 100%;
+            height: 100%;
             display: flex;
             justify-content: center;
             align-items: center;
@@ -1172,10 +1216,10 @@
 
     <div class="app-container">
 
-        <!-- NAVIGASI & MUSIK -->
+        <!-- NAVIGASI & MUSIK (DIKECILKAN) -->
         <div class="side-controls" id="side-controls">
             <button class="ctrl-btn btn-nav-arrow" onclick="navigasiKe('awal')">
-                <img src="https://cdn-icons-png.flaticon.com/512/130/130906.png" style="width:100%; height:100%; object-fit:contain;" alt="Ke Awal">
+                <img src="https://cdn-icons-png.flaticon.com/512/130/130906.png" style="width:70%; height:70%; object-fit:contain;" alt="Ke Awal">
             </button>
             <button class="ctrl-btn btn-music-ctrl music-rotating" id="music-toggle-btn" onclick="toggleMusik()">
                 <svg id="music-icon-svg" viewBox="0 0 24 24">
@@ -1183,7 +1227,7 @@
                 </svg>
             </button>
             <button class="ctrl-btn btn-nav-arrow" onclick="navigasiKe('akhir')">
-                <img src="https://cdn-icons-png.flaticon.com/512/130/130907.png" style="width:100%; height:100%; object-fit:contain;" alt="Ke Akhir">
+                <img src="https://cdn-icons-png.flaticon.com/512/130/130907.png" style="width:70%; height:70%; object-fit:contain;" alt="Ke Akhir">
             </button>
         </div>
 
@@ -1209,6 +1253,14 @@
             <!-- HALAMAN 1 -->
             <section class="page h-medium" id="page1">
                 <img src="we.png" class="png-asset p1-img1 anim-top" alt="asset">
+                
+                <!-- TANDA SWIPE KEDIP-KEDIP (HILANG SAAT SCROLL) -->
+                <div class="swipe-indicator" id="swipe-indicator">
+                    <span class="swipe-text">Scroll</span>
+                    <svg class="swipe-icon" viewBox="0 0 24 24">
+                        <path d="M7.41 8.59L12 13.17l4.59-4.58L18 10l-6 6-6-6z"/>
+                    </svg>
+                </div>
             </section>
 
             <!-- HALAMAN 2 -->
@@ -1339,7 +1391,7 @@
                 <div class="gift-container gift-anim gift-anim-bottom">
                     <div class="bank-card">
                         <div class="bank-name">Bank BNI</div>
-                        <div class="account-box" onclick="salinNoRek('1950375142', this)">
+                        <div class="account-box" onclick="salinNoRek('6666666', this)">
                             <div class="acc-left">
                                 <svg class="icon-svg" viewBox="0 0 24 24"><path d="M20 4H4c-1.11 0-1.99.89-1.99 2L2 18c0 1.11.89 2 2 2h16c1.11 0 2-.89 2-2V6c0-1.11-.89-2-2-2zm0 14H4v-6h16v6zm0-10H4V6h16v2z"/></svg>
                                 <span class="num-text">6666666</span>
@@ -1351,7 +1403,7 @@
 
                     <div class="bank-card">
                         <div class="bank-name">Bank BCA</div>
-                        <div class="account-box" onclick="salinNoRek('8275610280', this)">
+                        <div class="account-box" onclick="salinNoRek('8888888', this)">
                             <div class="acc-left">
                                 <svg class="icon-svg" viewBox="0 0 24 24"><path d="M20 4H4c-1.11 0-1.99.89-1.99 2L2 18c0 1.11.89 2 2 2h16c1.11 0 2-.89 2-2V6c0-1.11-.89-2-2-2zm0 14H4v-6h16v6zm0-10H4V6h16v2z"/></svg>
                                 <span class="num-text">8888888</span>
@@ -1508,7 +1560,22 @@
                 }, 300);
 
                 startObserver(); 
+                initSwipeHide(); // Inisialisasi event deteksi scroll untuk menyembunyikan tanda swipe
             }, 1200);
+        }
+
+        /* --- DETEKSI SCROLL UNTUK HILANGKAN SWIPE INDICATOR --- */
+        function initSwipeHide() {
+            const swipeInd = document.getElementById('swipe-indicator');
+            if (!content || !swipeInd) return;
+
+            const handleScroll = () => {
+                if (content.scrollTop > 30) {
+                    swipeInd.classList.add('hide');
+                    content.removeEventListener('scroll', handleScroll);
+                }
+            };
+            content.addEventListener('scroll', handleScroll);
         }
 
         function navigasiKe(tujuan) {
